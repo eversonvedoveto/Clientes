@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Model;
+package View;
 
+import View.Cliente;
 import org.hibernate.Session;
 
 /**

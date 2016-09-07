@@ -10,7 +10,7 @@
   <property name="hibernate.connection.url">jdbc:mysql://localhost/clientes</property>
   <property name="hibernate.hbm2ddl.auto">update</property>
  
-  <mapping class="Model.Cliente"/>
+  <mapping class="View.Cliente"/>
  
  </session-factory>
 </hibernate-configuration>
