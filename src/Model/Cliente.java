@@ -62,7 +62,7 @@ public class Cliente implements Serializable {
 
     public Cliente(Long id) {
         this.id = id;
-        this.nome = nome;
+       
     }
 
     public Long getId() {
