@@ -1,19 +1,11 @@
 package View;
 
-import Model.Cliente2;
-import javax.persistence.PersistenceUnit;
+
+
 import javax.swing.JOptionPane;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
-/**
- *
- * @author Everson
- */
+
 public class Formulario extends javax.swing.JFrame {
 
     /**
@@ -31,6 +23,7 @@ public class Formulario extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
         ButtonGenero = new javax.swing.ButtonGroup();
         entityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("clientes?zeroDateTimeBehavior=convertToNullPU").createEntityManager();
@@ -38,6 +31,8 @@ public class Formulario extends javax.swing.JFrame {
         clienteList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : clienteQuery.getResultList();
         clienteQuery1 = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT c FROM Cliente c");
         clienteList1 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : clienteQuery1.getResultList();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
         jPanel1 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         nomeCampo = new javax.swing.JTextField();
@@ -58,7 +53,16 @@ public class Formulario extends javax.swing.JFrame {
         femininoCampo = new javax.swing.JRadioButton();
         masculinoCampo = new javax.swing.JRadioButton();
         limparBotao = new javax.swing.JButton();
-        botaoListar = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tabelaClientes = new javax.swing.JTable();
+        jLabel9 = new javax.swing.JLabel();
+        campoId = new javax.swing.JTextField();
+        botaoBuscar = new javax.swing.JButton();
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane2.setViewportView(jTextArea1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -137,17 +141,83 @@ public class Formulario extends javax.swing.JFrame {
             }
         });
 
-        botaoListar.setText("Listar");
-        botaoListar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoListarActionPerformed(evt);
+        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, clienteList, tabelaClientes);
+        org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${id}"));
+        columnBinding.setColumnName("Id");
+        columnBinding.setColumnClass(Long.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${nome}"));
+        columnBinding.setColumnName("Nome");
+        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${cpf}"));
+        columnBinding.setColumnName("Cpf");
+        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${rg}"));
+        columnBinding.setColumnName("Rg");
+        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${cep}"));
+        columnBinding.setColumnName("Cep");
+        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${endereco}"));
+        columnBinding.setColumnName("Endereco");
+        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${bairro}"));
+        columnBinding.setColumnName("Bairro");
+        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${cidade}"));
+        columnBinding.setColumnName("Cidade");
+        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${genero}"));
+        columnBinding.setColumnName("Genero");
+        columnBinding.setColumnClass(String.class);
+        bindingGroup.addBinding(jTableBinding);
+        jTableBinding.bind();org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, clienteList, org.jdesktop.beansbinding.ObjectProperty.create(), tabelaClientes, org.jdesktop.beansbinding.BeanProperty.create("selectedElement"));
+        bindingGroup.addBinding(binding);
+
+        tabelaClientes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabelaClientesMouseClicked(evt);
             }
         });
+        jScrollPane1.setViewportView(tabelaClientes);
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addComponent(jScrollPane1)
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(305, 305, 305))
+        );
+
+        jLabel9.setText("Id");
+
+        campoId.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                campoIdFocusLost(evt);
+            }
+        });
+        campoId.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campoIdActionPerformed(evt);
+            }
+        });
+
+        botaoBuscar.setText("Buscar");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(32, 32, 32)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -159,36 +229,46 @@ public class Formulario extends javax.swing.JFrame {
                     .addComponent(jLabel8)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel9))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cpfCampo, javax.swing.GroupLayout.DEFAULT_SIZE, 628, Short.MAX_VALUE)
-                    .addComponent(rgCampo)
-                    .addComponent(enderecoCampo)
-                    .addComponent(bairroCampo)
-                    .addComponent(cidadeCampo)
-                    .addComponent(cepCampo)
-                    .addComponent(nomeCampo)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cpfCampo, javax.swing.GroupLayout.DEFAULT_SIZE, 686, Short.MAX_VALUE)
+                            .addComponent(rgCampo)
+                            .addComponent(enderecoCampo)
+                            .addComponent(bairroCampo)
+                            .addComponent(cidadeCampo)
+                            .addComponent(cepCampo)
+                            .addComponent(nomeCampo)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(femininoCampo)
-                                .addGap(18, 18, 18)
-                                .addComponent(masculinoCampo))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(26, 26, 26)
-                                .addComponent(salvarBotao)
-                                .addGap(18, 18, 18)
-                                .addComponent(limparBotao)
-                                .addGap(18, 18, 18)
-                                .addComponent(botaoListar)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(77, 77, 77))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(femininoCampo)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(masculinoCampo))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(26, 26, 26)
+                                        .addComponent(salvarBotao)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(limparBotao)))
+                                .addGap(0, 516, Short.MAX_VALUE)))
+                        .addGap(77, 77, 77))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(campoId, javax.swing.GroupLayout.PREFERRED_SIZE, 461, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(botaoBuscar)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(campoId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botaoBuscar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(nomeCampo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -227,8 +307,10 @@ public class Formulario extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(salvarBotao)
-                    .addComponent(limparBotao)
-                    .addComponent(botaoListar)))
+                    .addComponent(limparBotao))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -242,8 +324,10 @@ public class Formulario extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(61, 61, 61)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(264, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        bindingGroup.bind();
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -266,7 +350,10 @@ public class Formulario extends javax.swing.JFrame {
 
     private void salvarBotaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salvarBotaoActionPerformed
        //Cria o objeto Cliente e pega os valores dos campos
-        Cliente objCliente = new Cliente();
+       
+       Cliente objCliente = new Cliente();
+       
+       objCliente.setId(Long.parseLong(campoId.getText()));
        objCliente.setNome(nomeCampo.getText());
        objCliente.setRg(rgCampo.getText());
        objCliente.setCpf(cpfCampo.getText());
@@ -283,9 +370,11 @@ public class Formulario extends javax.swing.JFrame {
        //Cria o objeto Data Acess Object que tem os métodos de salvar no DB
        ClienteDAO clientedao = new ClienteDAO();
        //Salva no banco
-       clientedao.save(objCliente);
+       //FAZER IF PARA SALVAR OU DAR UPDATE
+       clientedao.merge(objCliente);
        limparBotaoActionPerformed(evt);
        JOptionPane.showMessageDialog(null,"O cadastro foi salvo");
+       botaoAtualizaActionPerformed(evt);
     }//GEN-LAST:event_salvarBotaoActionPerformed
 
     private void limparBotaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limparBotaoActionPerformed
@@ -299,13 +388,33 @@ public class Formulario extends javax.swing.JFrame {
         
     }//GEN-LAST:event_limparBotaoActionPerformed
 
-    private void botaoListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoListarActionPerformed
-            ListaClientes frame = new ListaClientes();  
-      this.dispose(); 
-    frame.setVisible(true);  
-    
-    
-    }//GEN-LAST:event_botaoListarActionPerformed
+    private void tabelaClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaClientesMouseClicked
+        
+    }//GEN-LAST:event_tabelaClientesMouseClicked
+
+    private void campoIdFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_campoIdFocusLost
+       
+        ClienteDAO dao = new ClienteDAO();
+        
+        Cliente objCliente = dao.getById(Long.parseLong(campoId.getText()));
+        
+        
+        
+        nomeCampo.setText(objCliente.getNome());
+        rgCampo.setText(objCliente.getRg());
+        cpfCampo.setText(objCliente.getCpf());
+        enderecoCampo.setText(objCliente.getEndereco());
+        bairroCampo.setText(objCliente.getBairro());
+        cidadeCampo.setText(objCliente.getCidade());
+        cepCampo.setText(objCliente.getCep());
+       
+       
+     
+    }//GEN-LAST:event_campoIdFocusLost
+
+    private void campoIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoIdActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_campoIdActionPerformed
 
     /**
      * @param args the command line arguments
@@ -346,7 +455,8 @@ public class Formulario extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup ButtonGenero;
     private javax.swing.JTextField bairroCampo;
-    private javax.swing.JButton botaoListar;
+    private javax.swing.JButton botaoBuscar;
+    private javax.swing.JTextField campoId;
     private javax.swing.JTextField cepCampo;
     private javax.swing.JTextField cidadeCampo;
     private java.util.List<View.Cliente> clienteList;
@@ -365,11 +475,18 @@ public class Formulario extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JButton limparBotao;
     private javax.swing.JRadioButton masculinoCampo;
     private javax.swing.JTextField nomeCampo;
     private javax.swing.JTextField rgCampo;
     private javax.swing.JButton salvarBotao;
+    private javax.swing.JTable tabelaClientes;
+    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }

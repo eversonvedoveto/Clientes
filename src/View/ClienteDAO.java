@@ -6,17 +6,35 @@
 package View;
 
 import View.Cliente;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import org.hibernate.Session;
 
 /**
  *
  * @author Everson
  */
-public class ClienteDAO implements ClienteInterfaceDAO{
+public class ClienteDAO {
+    
+    protected EntityManager entityManager;
 
     private Session session;
     
-    @Override
+    public ClienteDAO() {
+                     entityManager = getEntityManager();
+           }
+    
+    private EntityManager getEntityManager() {
+                     EntityManagerFactory factory = Persistence.createEntityManagerFactory("clientes?zeroDateTimeBehavior=convertToNullPU");
+                     if (entityManager == null) {
+                              entityManager = factory.createEntityManager();
+                     }
+   
+                     return entityManager;
+           }
+    
+    
     public void save(Cliente cliente) {
        session = HibernateUtil.getSessionFactory().openSession();
        try {
@@ -30,21 +48,20 @@ public class ClienteDAO implements ClienteInterfaceDAO{
 		}
     }
 
-    @Override
-    public void update(Cliente cliente) {
-        
-        session = HibernateUtil.getSessionFactory().openSession();
-
-		try {
-			session = HibernateUtil.getSessionFactory().openSession();
-			session.beginTransaction();
-			session.update(cliente);
-			session.getTransaction().commit();
-		} finally {
-			session.close();
-
-		}
-       
-    }
+    public void merge(Cliente cliente) {
+                     try {
+                              entityManager.getTransaction().begin();
+                              entityManager.merge(cliente);
+                              entityManager.getTransaction().commit();
+                     } catch (Exception ex) {
+                              ex.printStackTrace();
+                              entityManager.getTransaction().rollback();
+                     }
+           }
+    
+    
+    public Cliente getById(long id) {
+                  return entityManager.find(Cliente.class, id);
+           }
     
 }

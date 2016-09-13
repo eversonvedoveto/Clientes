@@ -43,7 +43,7 @@ public class Cliente implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    
     @Basic(optional = false)
     @Column(name = "id")
     private Long id;
@@ -69,6 +69,7 @@ public class Cliente implements Serializable {
 
     public Cliente(Long id) {
         this.id = id;
+        this.nome = nome;
     }
 
     public Long getId() {
