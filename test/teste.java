@@ -1,6 +1,6 @@
 
-import View.Cliente;
-import View.ClienteDAO;
+import Model.Cliente;
+import Model.ClienteDAO;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -17,6 +17,6 @@ public class teste {
         Cliente cliente = new Cliente();
         cliente.setNome("Everson");
         ClienteDAO dao = new ClienteDAO();
-        dao.save(cliente);
+        dao.merge(cliente);
     }
 }

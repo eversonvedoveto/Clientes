@@ -1,25 +1,19 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package View;
+package Model;
 
-import View.Cliente;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import org.hibernate.Session;
+
 
 /**
  *
- * @author Everson
+ * @author Everson RA 1502516-5
  */
 public class ClienteDAO {
     
     protected EntityManager entityManager;
 
-    private Session session;
+    
     
     public ClienteDAO() {
                      entityManager = getEntityManager();
@@ -35,18 +29,7 @@ public class ClienteDAO {
            }
     
     
-    public void save(Cliente cliente) {
-       session = HibernateUtil.getSessionFactory().openSession();
-       try {
-			session.beginTransaction();
-			session.save(cliente);
-			session.getTransaction().commit();
-
-		} finally {
-			session.close();
-
-		}
-    }
+    
 
     public void merge(Cliente cliente) {
                      try {

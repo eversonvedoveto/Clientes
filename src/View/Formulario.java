@@ -2,9 +2,14 @@ package View;
 
 
 
+import Model.Cliente;
+import Model.ClienteDAO;
 import javax.swing.JOptionPane;
 
-
+/**
+ *
+ * @author Everson RA 1502516-5
+ */
 
 public class Formulario extends javax.swing.JFrame {
 
@@ -13,6 +18,12 @@ public class Formulario extends javax.swing.JFrame {
      */
     public Formulario() {
         initComponents();
+    }
+    
+    private void limpaCampos(){
+          Formulario form = new Formulario();
+        this.dispose();
+        form.setVisible(true);
     }
 
     /**
@@ -192,8 +203,8 @@ public class Formulario extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(305, 305, 305))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(128, 128, 128))
         );
 
         jLabel9.setText("Id");
@@ -210,6 +221,11 @@ public class Formulario extends javax.swing.JFrame {
         });
 
         botaoBuscar.setText("Buscar");
+        botaoBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoBuscarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -369,12 +385,12 @@ public class Formulario extends javax.swing.JFrame {
        }
        //Cria o objeto Data Acess Object que tem os métodos de salvar no DB
        ClienteDAO clientedao = new ClienteDAO();
-       //Salva no banco
-       //FAZER IF PARA SALVAR OU DAR UPDATE
+       //Salva no banco ou modifica, depende do ID passado
+       
        clientedao.merge(objCliente);
        limparBotaoActionPerformed(evt);
        JOptionPane.showMessageDialog(null,"O cadastro foi salvo");
-       botaoAtualizaActionPerformed(evt);
+       limpaCampos();
     }//GEN-LAST:event_salvarBotaoActionPerformed
 
     private void limparBotaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limparBotaoActionPerformed
@@ -394,7 +410,15 @@ public class Formulario extends javax.swing.JFrame {
 
     private void campoIdFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_campoIdFocusLost
        
-        ClienteDAO dao = new ClienteDAO();
+     
+    }//GEN-LAST:event_campoIdFocusLost
+
+    private void campoIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoIdActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_campoIdActionPerformed
+
+    private void botaoBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoBuscarActionPerformed
+         ClienteDAO dao = new ClienteDAO();
         
         Cliente objCliente = dao.getById(Long.parseLong(campoId.getText()));
         
@@ -407,14 +431,7 @@ public class Formulario extends javax.swing.JFrame {
         bairroCampo.setText(objCliente.getBairro());
         cidadeCampo.setText(objCliente.getCidade());
         cepCampo.setText(objCliente.getCep());
-       
-       
-     
-    }//GEN-LAST:event_campoIdFocusLost
-
-    private void campoIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoIdActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_campoIdActionPerformed
+    }//GEN-LAST:event_botaoBuscarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -459,8 +476,8 @@ public class Formulario extends javax.swing.JFrame {
     private javax.swing.JTextField campoId;
     private javax.swing.JTextField cepCampo;
     private javax.swing.JTextField cidadeCampo;
-    private java.util.List<View.Cliente> clienteList;
-    private java.util.List<View.Cliente> clienteList1;
+    private java.util.List<Model.Cliente> clienteList;
+    private java.util.List<Model.Cliente> clienteList1;
     private javax.persistence.Query clienteQuery;
     private javax.persistence.Query clienteQuery1;
     private javax.swing.JTextField cpfCampo;

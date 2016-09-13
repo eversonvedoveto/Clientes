@@ -1,9 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ *
+ * @author Everson RA 1502516-5
  */
-package View;
+package Model;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
@@ -11,18 +10,13 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-/**
- *
- * @author Everson
- */
+
 @Entity
 @Table(name = "cliente", catalog = "clientes", schema = "")
 @NamedQueries({
@@ -42,8 +36,7 @@ public class Cliente implements Serializable {
     private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
 
     private static final long serialVersionUID = 1L;
-    @Id
-    
+    @Id    
     @Basic(optional = false)
     @Column(name = "id")
     private Long id;
