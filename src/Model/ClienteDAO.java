@@ -4,7 +4,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-
+//GIT RECEBENDO
 /**
  *
  * @author Everson RA 1502516-5
