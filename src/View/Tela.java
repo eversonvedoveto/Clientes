@@ -5,6 +5,7 @@ package View;
 import Model.Cliente;
 import Model.ClienteDAO;
 import javax.swing.JOptionPane;
+import javax.swing.JRadioButton;
 
 /**
  *
@@ -143,6 +144,11 @@ public class Tela extends javax.swing.JFrame {
         ButtonGenero.add(masculinoCampo);
         masculinoCampo.setSelected(true);
         masculinoCampo.setText("Masculino");
+        masculinoCampo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                masculinoCampoActionPerformed(evt);
+            }
+        });
 
         limparBotao.setBackground(new java.awt.Color(230, 230, 230));
         limparBotao.setText("Limpar");
@@ -348,6 +354,82 @@ public class Tela extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void botaoBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoBuscarActionPerformed
+        ClienteDAO dao = new ClienteDAO();
+
+        Cliente objCliente = dao.getById(Long.parseLong(campoId.getText()));
+
+        nomeCampo.setText(objCliente.getNome());
+        rgCampo.setText(objCliente.getRg());
+        cpfCampo.setText(objCliente.getCpf());
+        enderecoCampo.setText(objCliente.getEndereco());
+        bairroCampo.setText(objCliente.getBairro());
+        cidadeCampo.setText(objCliente.getCidade());
+        cepCampo.setText(objCliente.getCep());
+        if("Masculino".equals(objCliente.getGenero())){
+            System.out.println("Masc");
+            ButtonGenero.setSelected(masculinoCampo.getModel(), true);
+           
+        }
+       if("Feminino".equals(objCliente.getGenero())){
+           System.out.println("Fem");
+           ButtonGenero.setSelected(femininoCampo.getModel(), true);
+           
+        }
+    }//GEN-LAST:event_botaoBuscarActionPerformed
+
+    private void campoIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoIdActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_campoIdActionPerformed
+
+    private void campoIdFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_campoIdFocusLost
+
+    }//GEN-LAST:event_campoIdFocusLost
+
+    private void tabelaClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaClientesMouseClicked
+
+    }//GEN-LAST:event_tabelaClientesMouseClicked
+
+    private void limparBotaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limparBotaoActionPerformed
+        nomeCampo.setText("");
+        rgCampo.setText("");
+        cpfCampo.setText("");
+        enderecoCampo.setText("");
+        bairroCampo.setText("");
+        cidadeCampo.setText("");
+        cepCampo.setText("");
+
+    }//GEN-LAST:event_limparBotaoActionPerformed
+
+    private void salvarBotaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salvarBotaoActionPerformed
+        //Cria o objeto Cliente e pega os valores dos campos
+
+        Cliente objCliente = new Cliente();
+
+        objCliente.setId(Long.parseLong(campoId.getText()));
+        objCliente.setNome(nomeCampo.getText());
+        objCliente.setRg(rgCampo.getText());
+        objCliente.setCpf(cpfCampo.getText());
+        objCliente.setEndereco(enderecoCampo.getText());
+        objCliente.setBairro(bairroCampo.getText());
+        objCliente.setCidade(cidadeCampo.getText());
+        objCliente.setCep(cepCampo.getText());
+        if(femininoCampo.isSelected()){
+            objCliente.setGenero("Feminino");
+        }
+        if(masculinoCampo.isSelected()){
+            objCliente.setGenero("Masculino");
+        }
+        //Cria o objeto Data Acess Object que tem os métodos de salvar no DB
+        ClienteDAO clientedao = new ClienteDAO();
+        //Salva no banco ou modifica, depende do ID passado
+
+        clientedao.merge(objCliente);
+        limparBotaoActionPerformed(evt);
+        JOptionPane.showMessageDialog(null,"O cadastro foi salvo");
+        limpaCampos();
+    }//GEN-LAST:event_salvarBotaoActionPerformed
+
     private void enderecoCampoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enderecoCampoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_enderecoCampoActionPerformed
@@ -364,74 +446,9 @@ public class Tela extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_nomeCampoActionPerformed
 
-    private void salvarBotaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salvarBotaoActionPerformed
-       //Cria o objeto Cliente e pega os valores dos campos
-       
-       Cliente objCliente = new Cliente();
-       
-       objCliente.setId(Long.parseLong(campoId.getText()));
-       objCliente.setNome(nomeCampo.getText());
-       objCliente.setRg(rgCampo.getText());
-       objCliente.setCpf(cpfCampo.getText());
-       objCliente.setEndereco(enderecoCampo.getText());
-       objCliente.setBairro(bairroCampo.getText());
-       objCliente.setCidade(cidadeCampo.getText());
-       objCliente.setCep(cepCampo.getText());
-       if(femininoCampo.isSelected()){
-           objCliente.setGenero("Feminino");
-       }
-       if(masculinoCampo.isSelected()){
-           objCliente.setGenero("Masculino");
-       }
-       //Cria o objeto Data Acess Object que tem os métodos de salvar no DB
-       ClienteDAO clientedao = new ClienteDAO();
-       //Salva no banco ou modifica, depende do ID passado
-       
-       clientedao.merge(objCliente);
-       limparBotaoActionPerformed(evt);
-       JOptionPane.showMessageDialog(null,"O cadastro foi salvo");
-       limpaCampos();
-    }//GEN-LAST:event_salvarBotaoActionPerformed
-
-    private void limparBotaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limparBotaoActionPerformed
-        nomeCampo.setText("");
-        rgCampo.setText("");
-        cpfCampo.setText("");
-        enderecoCampo.setText("");
-        bairroCampo.setText("");   
-        cidadeCampo.setText("");
-        cepCampo.setText("");
-        
-    }//GEN-LAST:event_limparBotaoActionPerformed
-
-    private void tabelaClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaClientesMouseClicked
-        
-    }//GEN-LAST:event_tabelaClientesMouseClicked
-
-    private void campoIdFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_campoIdFocusLost
-       
-     
-    }//GEN-LAST:event_campoIdFocusLost
-
-    private void campoIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoIdActionPerformed
+    private void masculinoCampoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_masculinoCampoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_campoIdActionPerformed
-
-    private void botaoBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoBuscarActionPerformed
-         ClienteDAO dao = new ClienteDAO();
-        
-        Cliente objCliente = dao.getById(Long.parseLong(campoId.getText()));
-        
-        
-        
-        nomeCampo.setText(objCliente.getNome());
-        rgCampo.setText(objCliente.getRg());
-        cpfCampo.setText(objCliente.getCpf());
-        enderecoCampo.setText(objCliente.getEndereco());
-        bairroCampo.setText(objCliente.getBairro());
-        cidadeCampo.setText(objCliente.getCidade());
-        cepCampo.setText(objCliente.getCep());
-    }//GEN-LAST:event_botaoBuscarActionPerformed
+    }//GEN-LAST:event_masculinoCampoActionPerformed
 
     /**
      * @param args the command line arguments
