@@ -356,7 +356,7 @@ public class Tela extends javax.swing.JFrame {
 
     private void botaoBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoBuscarActionPerformed
         ClienteDAO dao = new ClienteDAO();
-
+try{
         Cliente objCliente = dao.getById(Long.parseLong(campoId.getText()));
 
         nomeCampo.setText(objCliente.getNome());
@@ -376,6 +376,9 @@ public class Tela extends javax.swing.JFrame {
            ButtonGenero.setSelected(femininoCampo.getModel(), true);
            
         }
+}catch(Exception e){
+    JOptionPane.showMessageDialog(null,"Id incorreto");
+}
     }//GEN-LAST:event_botaoBuscarActionPerformed
 
     private void campoIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoIdActionPerformed

@@ -37,7 +37,6 @@ public class ClienteDAO {
                               entityManager.merge(cliente);
                               entityManager.getTransaction().commit();
                      } catch (Exception ex) {
-                              ex.printStackTrace();
                               entityManager.getTransaction().rollback();
                      }
            }
