@@ -367,12 +367,12 @@ public class Tela extends javax.swing.JFrame {
         cidadeCampo.setText(objCliente.getCidade());
         cepCampo.setText(objCliente.getCep());
         if("Masculino".equals(objCliente.getGenero())){
-            System.out.println("Masc");
+            
             ButtonGenero.setSelected(masculinoCampo.getModel(), true);
            
         }
        if("Feminino".equals(objCliente.getGenero())){
-           System.out.println("Fem");
+           
            ButtonGenero.setSelected(femininoCampo.getModel(), true);
            
         }
