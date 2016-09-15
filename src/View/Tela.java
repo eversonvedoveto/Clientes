@@ -226,7 +226,7 @@ public class Tela extends javax.swing.JFrame {
             }
         });
 
-        botaoBuscar.setText("Buscar");
+        botaoBuscar.setText("Buscar para Editar");
         botaoBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botaoBuscarActionPerformed(evt);
@@ -377,7 +377,7 @@ try{
            
         }
 }catch(Exception e){
-    JOptionPane.showMessageDialog(null,"Id incorreto");
+    JOptionPane.showMessageDialog(null,"Id incorreto ou não encontrado");
 }
     }//GEN-LAST:event_botaoBuscarActionPerformed
 

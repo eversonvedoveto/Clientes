@@ -15,7 +15,16 @@ import Model.ClienteDAO;
 public class teste {
     public static void main(String[] args) {
         Cliente cliente = new Cliente();
+        cliente.setId(Long.parseLong("1"));
         cliente.setNome("Everson");
+        cliente.setCpf("06864493989");
+        cliente.setCep("87505512");
+        cliente.setBairro("Centro");
+        cliente.setCidade("Umuarama");
+        cliente.setEndereco("Rua Vicente");
+        cliente.setGenero("Masculino");
+        cliente.setRg("101347544");
+        
         ClienteDAO dao = new ClienteDAO();
         dao.merge(cliente);
     }

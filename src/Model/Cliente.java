@@ -38,24 +38,26 @@ public class Cliente implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id    
     @Basic(optional = false)
-    @Column(name = "id")
+    @Column(name = "id", nullable = false)
     private Long id;
-    @Column(name = "bairro")
-    private String bairro;
-    @Column(name = "cep")
-    private String cep;
-    @Column(name = "cidade")
-    private String cidade;
-    @Column(name = "cpf")
-    private String cpf;
-    @Column(name = "endereco")
-    private String endereco;
-    @Column(name = "genero")
-    private String genero;
-    @Column(name = "nome")
+    @Column(name = "nome", nullable = false)
     private String nome;
-    @Column(name = "rg")
+    @Column(name = "cpf", nullable = false, length = 11, unique = true)
+    private String cpf;
+    @Column(name = "rg", nullable = false)
     private String rg;
+    @Column(name = "cep", nullable = false)
+    private String cep;
+    @Column(name = "endereco", nullable = false)
+    private String endereco;
+    @Column(name = "bairro", nullable = false)
+    private String bairro;    
+    @Column(name = "cidade", nullable = false)
+    private String cidade;      
+    @Column(name = "genero", nullable = false)
+    private String genero;
+    
+    
 
     public Cliente() {
     }
